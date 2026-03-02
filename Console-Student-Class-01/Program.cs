@@ -12,22 +12,51 @@
             Console.WriteLine("Enter student name:");
             string studentName = Console.ReadLine();
 
-            Console.WriteLine("Enter student surname:");
-            string studentSurname = Console.ReadLine();
+            //Console.WriteLine("Enter student surname:");
+            //string studentSurname = Console.ReadLine();
 
-            Console.WriteLine("Enter student email:");
-            string studentEmail = Console.ReadLine();
+            //Console.WriteLine("Enter student email:");
+            //string studentEmail = Console.ReadLine();
 
             Student student = new Student();
 
             student.StudentID = studentId;
             student.StudentName = studentName;
-            student.StudentSurname = studentSurname;
-            student.StudentEmail = studentEmail;
+            //student.StudentSurname = studentSurname;
+            //student.StudentEmail = studentEmail;
+
+            Console.WriteLine("Registered Student Information:");
+            Console.WriteLine($"Student ID = {student.StudentID} Student Name = {student.StudentName} Student Surname = {student.StudentSurname} Student Email = {student.StudentEmail}");
 
             return student;
 
         }
+
+        public static void ListStudents(List<Student> studentList)
+        {
+            Console.WriteLine("Student List");
+            foreach (var item in studentList)
+            {
+                Console.WriteLine($"Student ID = {item.StudentID} Student Name = {item.StudentName} Student Surname = {item.StudentSurname} Student Email = {item.StudentEmail}");
+            }
+        }
+
+        public static void FindStudent(List<Student> studentList)
+        {
+            Console.WriteLine("Enter student ID to find:");
+            int studentId = Convert.ToInt32(Console.ReadLine());
+            Student foundStudent = studentList.FirstOrDefault(s => s.StudentID == studentId);
+            if (foundStudent != null)
+            {
+                Console.WriteLine($"Student found: ID = {foundStudent.StudentID}, Name = {foundStudent.StudentName}, Surname = {foundStudent.StudentSurname}, Email = {foundStudent.StudentEmail}");
+            }
+            else
+            {
+                Console.WriteLine("Student not found.");
+            }
+                
+        }
+
         static void Main(string[] args)
         {
             Course course = new Course();
@@ -51,19 +80,31 @@
             List<Course> courseList = new List<Course>();
             List<Student> studentList = new List<Student>();
 
+            // Console.WriteLine("Course count: " + (courseList.Count() > 0 ? courseList.Count() : "0"));
+            Console.WriteLine($"Course count: {courseList?.Count ?? 0}");
+            Console.ReadLine();
+
             courseList.Add(course);
             courseList.Add(course1);
             courseList.Add(course2);
 
-            Console.WriteLine("Course count: " + (courseList.Count() > 0 ? courseList.Count() : "0"));
-            // Console.WriteLine($"Course count: {courseList?.Count ?? 0}");
+            //Console.WriteLine("Course count: " + (courseList.Count() > 0 ? courseList.Count() : "0"));
+            Console.WriteLine($"Course count: {courseList?.Count ?? 0}");
 
-            //foreach (var item in courseList)
+            foreach (var item in courseList)
+            {
+                Console.WriteLine($"Course ID = {item.CourseID} Course Name = {item.CourseName} Course Code = {item.CourseCode} Course Credit = {item.CourseCredit}");
+            }
+
+            //for (int i = 0; i < courseList.Count; i++)
             //{
-            //    Console.WriteLine($"Course ID = {item.CourseID} Course Name = {item.CourseName} Course Code = {item.CourseCode} Course Credit = {item.CourseCredit}");
+            //    Console.WriteLine($"Course ID = {courseList[i].CourseID} Course Name = {courseList[i].CourseName} Course Code = {courseList[i].CourseCode} Course Credit = {courseList[i].CourseCredit}");
             //}
 
             //Student student = RegisterStudents();
+
+            ////Console.WriteLine("Student Information:");
+            ////Console.WriteLine($"Student ID = {student.StudentID} Student Name = {student.StudentName} Student Surname = {student.StudentSurname} Student Email = {student.StudentEmail}");
 
             //studentList.Add(student);
 
@@ -71,12 +112,18 @@
 
             //studentList.Add(student);
 
+            //Console.ReadLine();
+
+            //Console.WriteLine("Student List");
+
             //foreach (var item in studentList)
             //{
             //    Console.WriteLine($"Student ID = {item.StudentID} Student Name = {item.StudentName} Student Surname = {item.StudentSurname} Student Email = {item.StudentEmail}");
             //}
 
-            Student student = RegisterStudents();
+            //Student student = RegisterStudents();
+
+            Student student = new Student();
 
             bool exit = false;
 
@@ -84,26 +131,29 @@
             {
                 Console.WriteLine("Student Registration System");
                 Console.WriteLine("1 - Do you want to add a new student");
-                Console.WriteLine("2 - Lists students");
-                Console.WriteLine("3 - Exit");
+                Console.WriteLine("2 - Display All Students");
+                Console.WriteLine("3 - Find Student");
+                Console.WriteLine("4 - Exit");
                 string answer = Console.ReadLine();
                 if (answer == "1")
                 {
                     student = RegisterStudents();
                     studentList.Add(student);
-                } else if (answer == "2")
+                }
+                else if (answer == "2")
                 {
-                    Console.WriteLine("Student List");
-                    foreach (var item in studentList)
-                    {
-                        Console.WriteLine($"Student ID = {item.StudentID} Student Name = {item.StudentName} Student Surname = {item.StudentSurname} Student Email = {item.StudentEmail}");
-                    }
+                    ListStudents(studentList);
                 }
                 else if (answer == "3")
                 {
+                    FindStudent(studentList);
+                }
+                else if (answer == "4")
+                {
                     exit = true;
                 }
-                else                 {
+                else
+                {
                     Console.WriteLine("Invalid input. Please try again.");
                 }
             }
