@@ -1,4 +1,8 @@
-﻿namespace Console_Student_Class_01
+﻿using Microsoft.Extensions.Configuration;
+using System.Threading.Tasks;
+using DAL.Data;
+
+namespace Console_Student_Class_01
 {
     internal class Program
     {
@@ -57,8 +61,18 @@
                 
         }
 
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
+            var configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json")
+                .Build();
+
+            var studentRepository = new StudentRepository(configuration);
+
+            var studentService = new StudentService(studentRepository);
+
+
             Course course = new Course();
             course.CourseID = 1;
             course.CourseName = "Mathematics";
@@ -142,7 +156,8 @@
                 }
                 else if (answer == "2")
                 {
-                    ListStudents(studentList);
+                    // ListStudents(studentList);
+                    
                 }
                 else if (answer == "3")
                 {
