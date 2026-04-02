@@ -73,72 +73,11 @@ namespace Console_Student_Class_01
 
             var studentService = new StudentService(studentRepository);
 
-
-            Course course = new Course();
-            course.CourseID = 1;
-            course.CourseName = "Mathematics";
-            course.CourseCode = "MATH101";
-            course.CourseCredit = 3;
-
-            Course course1 = new Course();
-            course1.CourseID = 2;
-            course1.CourseName = "Physics";
-            course1.CourseCode = "PHYS101";
-            course1.CourseCredit = 4;
-
-            Course course2 = new Course();
-            course2.CourseID = 3;
-            course2.CourseName = "Chemistry";
-            course2.CourseCode = "CHEM101";
-            course2.CourseCredit = 3;
-
             List<Course> courseList = new List<Course>();
-            List<Student> studentList = new List<Student>();
-
-            // Console.WriteLine("Course count: " + (courseList.Count() > 0 ? courseList.Count() : "0"));
-            Console.WriteLine($"Course count: {courseList?.Count ?? 0}");
-            Console.ReadLine();
-
-            courseList.Add(course);
-            courseList.Add(course1);
-            courseList.Add(course2);
-
-            //Console.WriteLine("Course count: " + (courseList.Count() > 0 ? courseList.Count() : "0"));
-            Console.WriteLine($"Course count: {courseList?.Count ?? 0}");
-
-            foreach (var item in courseList)
-            {
-                Console.WriteLine($"Course ID = {item.CourseID} Course Name = {item.CourseName} Course Code = {item.CourseCode} Course Credit = {item.CourseCredit}");
-            }
-
-            //for (int i = 0; i < courseList.Count; i++)
-            //{
-            //    Console.WriteLine($"Course ID = {courseList[i].CourseID} Course Name = {courseList[i].CourseName} Course Code = {courseList[i].CourseCode} Course Credit = {courseList[i].CourseCredit}");
-            //}
-
-            //Student student = RegisterStudents();
-
-            ////Console.WriteLine("Student Information:");
-            ////Console.WriteLine($"Student ID = {student.StudentID} Student Name = {student.StudentName} Student Surname = {student.StudentSurname} Student Email = {student.StudentEmail}");
-
-            //studentList.Add(student);
-
-            //student = RegisterStudents();
-
-            //studentList.Add(student);
-
-            //Console.ReadLine();
-
-            //Console.WriteLine("Student List");
-
-            //foreach (var item in studentList)
-            //{
-            //    Console.WriteLine($"Student ID = {item.StudentID} Student Name = {item.StudentName} Student Surname = {item.StudentSurname} Student Email = {item.StudentEmail}");
-            //}
-
-            //Student student = RegisterStudents();
+            List<Student> studentList = new List<Student>();           
 
             Student student = new Student();
+            Course course = new Course();
 
             bool exit = false;
 

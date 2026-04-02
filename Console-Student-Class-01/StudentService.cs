@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DAL.Data.Interfaces;
+using DAL.Models;
 
 namespace Console_Student_Class_01
 {
@@ -19,6 +20,21 @@ namespace Console_Student_Class_01
         public async Task DisplayStudentListAsync()
         {
             var students = await _studentRepository.GetAllAsync();
+
+            foreach(Student s in students)
+            {
+                Console.WriteLine("Student List Item");
+                Console.WriteLine("Student ID : " + s.StudentID);
+                Console.WriteLine("Student Name : " + s.StudentName);
+                Console.WriteLine("Student Surename : " + s.StudentSurename);
+                Console.WriteLine("Student Email : " + s.StudentEmail);
+                Console.WriteLine("------------------------------------------------");
+
+            }   
+
+
+
+
         }
 
     }
