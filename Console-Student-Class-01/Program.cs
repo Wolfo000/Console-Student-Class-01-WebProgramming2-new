@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using System.Threading.Tasks;
 using DAL.Data;
+using DAL.Models;
 
 namespace Console_Student_Class_01
 {
