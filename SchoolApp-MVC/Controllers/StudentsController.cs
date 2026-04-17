@@ -8,5 +8,11 @@ namespace SchoolApp_MVC.Controllers
         {
             return View();
         }
+
+        public IActionResult StudentsList(int id)
+        {
+            ViewData["id"] = id;
+            return View();
+        }
     }
 }
