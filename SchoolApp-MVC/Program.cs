@@ -1,3 +1,7 @@
+using DAL.Data;
+using DAL.Data.Interfaces;
+using SchoolApp_MVC.Services;
+
 namespace SchoolApp_MVC
 {
     public class Program
@@ -6,8 +10,12 @@ namespace SchoolApp_MVC
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            
+
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddScoped<IStudentService, StudentService>();
+            builder.Services.AddScoped<IStudentRepository, StudentRepository>();
 
             var app = builder.Build();
 
