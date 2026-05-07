@@ -18,23 +18,11 @@ namespace SchoolApp_MVC.Services
             _studentRepository = studentRepository;
         }
 
-        public async Task DisplayStudentListAsync()
+        public async Task<IReadOnlyList<Student>> DisplayStudentListAsync()
         {
             var students = await _studentRepository.GetAllAsync();
 
-
-
-            foreach (Student s in students)
-            {
-                Console.WriteLine("Student List Item");
-                Console.WriteLine("Student ID : " + s.StudentID);
-                Console.WriteLine("Student Name : " + s.StudentName);
-                Console.WriteLine("Student Surename : " + s.StudentSurename);
-                Console.WriteLine("Student Email : " + s.StudentEmail);
-                Console.WriteLine("------------------------------------------------");
-            }
-
-            Console.WriteLine("Total number of students: " + students.Count);
+            return students;
         }
 
         public async Task AddStudentAsync(Student student)
@@ -55,7 +43,7 @@ namespace SchoolApp_MVC.Services
             return new Student
             {
                 StudentName = name,
-                StudentSurename = surname,
+                StudentSurname = surname,
                 StudentEmail = email
             };
 
@@ -84,7 +72,7 @@ namespace SchoolApp_MVC.Services
                 Console.WriteLine(
                     $"Student found: ID = {student.StudentID}, " +
                     $"Name = {student.StudentName}, " +
-                    $"Surname = {student.StudentSurename}, " +
+                    $"Surname = {student.StudentSurname}, " +
                     $"Email = {student.StudentEmail}");
             }
             else

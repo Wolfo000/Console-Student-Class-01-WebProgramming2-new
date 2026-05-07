@@ -4,7 +4,7 @@ namespace SchoolApp_MVC.Services
 {
     public interface IStudentService
     {
-        Task DisplayStudentListAsync();
+        Task<IReadOnlyList<Student>> DisplayStudentListAsync();
         Task AddStudentAsync(Student student);
         Student RegisterStudent();
 
