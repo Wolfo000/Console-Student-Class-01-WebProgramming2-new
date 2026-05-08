@@ -1,6 +1,7 @@
 ﻿using DAL.Models;
 using Microsoft.AspNetCore.Mvc;
 using SchoolApp_MVC.Services;
+using System.Threading.Tasks;
 
 namespace SchoolApp_MVC.Controllers
 {
@@ -14,11 +15,23 @@ namespace SchoolApp_MVC.Controllers
             //Student s = _studentService.FindStudentByIdAsync(1).GetAwaiter().GetResult();
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var students = _studentService.DisplayStudentListAsync().GetAwaiter().GetResult();
+            //var students = _studentService.DisplayStudentListAsync().GetAwaiter().GetResult();
+
+            var students = await _studentService.DisplayStudentListAsync();
 
             return View(students);
+        }
+
+        public async Task<IActionResult> Details(int id)
+        {
+            var student = await _studentService.FindStudentByIdAsync(id);
+            if (student == null)
+            {
+                return NotFound();
+            }
+            return View(student);
         }
 
         public IActionResult StudentsList(int id)
