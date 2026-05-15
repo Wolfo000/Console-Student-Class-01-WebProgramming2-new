@@ -83,22 +83,31 @@ namespace DAL.Data
 
         }
 
-        public async Task UpdateAsync(Student student)
+        public async Task<bool> UpdateAsync(Student student)
         {
-            const string sql = """
+            try
+            {
+                const string sql = """
                                UPDATE Student 
                                SET StudentName = @StudentName, StudentSurname = @StudentSurname, StudentEmail = @StudentEmail 
                                WHERE StudentID = @StudentID
                                """;
-            await using var connection = new SqlConnection(_connectionString);
-            await using var command = new SqlCommand(sql, connection);
-            command.Parameters.AddWithValue("@StudentID", student.StudentID);
-            command.Parameters.AddWithValue("@StudentName", student.StudentName);
-            command.Parameters.AddWithValue("@StudentSurname", student.StudentSurname);
-            command.Parameters.AddWithValue("@StudentEmail", student.StudentEmail);
-            await connection.OpenAsync();
-            await command.ExecuteNonQueryAsync();
+                await using var connection = new SqlConnection(_connectionString);
+                await using var command = new SqlCommand(sql, connection);
+                command.Parameters.AddWithValue("@StudentID", student.StudentID);
+                command.Parameters.AddWithValue("@StudentName", student.StudentName);
+                command.Parameters.AddWithValue("@StudentSurname", student.StudentSurname);
+                command.Parameters.AddWithValue("@StudentEmail", student.StudentEmail);
+                await connection.OpenAsync();
+                var rowsAffected = await command.ExecuteNonQueryAsync();
 
+                return rowsAffected > 0;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            
         }
 
         public async Task<Student> GetByIdAsync(int id)
